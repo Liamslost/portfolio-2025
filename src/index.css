@@ -7,4 +7,10 @@
   --color-tertiary: #3C5B60;
 
   --color-text-primary: #FFF8E0;
+
+
+}
+
+.clipPath {
+  clip-path: circle(50%);
 }
