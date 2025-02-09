@@ -17,8 +17,16 @@ function App() {
   const yPosRef = useRef(0);
   const storedXRef = useRef(0);
   const storedYRef = useRef(0);
+  const resetTimeoutRef = useRef(null);
 
   const meTl = gsap.timeline({delay: 1});
+  const blink = useRef(
+    gsap.timeline({
+      repeat: -1,
+      repeatDelay: 5,
+      paused: true,
+    })
+  ).current;
 
   useEffect(() => {
     gsap.set("#me", { yPercent: 90 });
@@ -89,12 +97,9 @@ function App() {
       );
 
       gsap.ticker.add(animateFace)
-  }, []);
-      // Mouse tracking event
-      window.addEventListener("mousemove", updateScreenCoords);
+  },[]);
 
   // CHECK IF DOM IS LOADED
-
   useEffect(() => {
     const handleDomContentLoaded = () => {
       setDomContentLoaded(true);
@@ -109,27 +114,80 @@ function App() {
     return () => {
       window.removeEventListener("DOMContentLoaded", handleDomContentLoaded);
     };
+  }, [meTl]);
+
+  useEffect(() => {
+    if (domContentLoaded) {
+    blink
+    .to("#right-eye, #left-eye", { duration: 0.01, opacity: 0 }, 0)
+    .to("#right-eye-2, #left-eye-2", { duration: 0.01, opacity: 1 }, 0)
+    .to("#right-eye, #left-eye", { duration: 0.01, opacity: 1 }, 0.15)
+    .to("#right-eye-2, #left-eye-2", { duration: 0.01, opacity: 0 }, 0.15);
+    blink.play();  
+    }
+  }, [domContentLoaded, blink]);
+      
+  useEffect(() => {
+    if (isExcited) {
+      gsap.to("#mouth", { opacity: 0, duration: 0.5 });
+      gsap.to("#eyes", { opacity: 0, duration: 0.5 });
+      gsap.to("#mouth-happy", { opacity: 1, duration: 0.5 });
+      gsap.to("#cheeks", { yPercent: -75, duration: 0.5 });
+    } else {
+      gsap.to("#mouth", { opacity: 1, duration: 0.2 });
+      gsap.to("#eyes", { opacity: 1, duration: 0.2 });
+      gsap.to("#mouth-happy", { opacity: 0, duration: 0.2 });
+      gsap.to("#cheeks", { yPercent: 0, duration: 0.2 });
+    }
+  }, [isExcited]);
+
+  useEffect(() => {
+    const anchors = document.querySelectorAll("a");
+    const handleMouseEnter = () => setIsExcited(true);
+    const handleMouseLeave = () => setIsExcited(false);
+
+    anchors.forEach((anchor) => {
+      anchor.addEventListener("mouseenter", handleMouseEnter);
+      anchor.addEventListener("mouseleave", handleMouseLeave);
+    });
+
+    return () => {
+      anchors.forEach((anchor) => {
+        anchor.removeEventListener("mouseenter", handleMouseEnter);
+        anchor.removeEventListener("mouseleave", handleMouseLeave);
+      });
+    };
   }, []);
-  document.querySelectorAll("a").forEach((anchor) => {
-    anchor.addEventListener("mouseenter", () => setIsExcited(true));
-    anchor.addEventListener("mouseleave", () => setIsExcited(false));
-  });
+
+  // Mouse tracking event
+  useEffect(() => {
+    window.addEventListener("mousemove", updateScreenCoords);
+
+    return () => {
+      window.removeEventListener("mousemove", updateScreenCoords);
+    };
+  }, []);
 
   function updateScreenCoords(event) {
     xPosRef.current = event.clientX;
     yPosRef.current = event.clientY;
+  
+  // Clear the existing timeout if the mouse moves
+  if (resetTimeoutRef.current) {
+    clearTimeout(resetTimeoutRef.current);
   }
 
-  // function addMouseEvent() {
-  //   const safeToAnimate = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
-
-  //   if (safeToAnimate) {
-  //     window.addEventListener("mousemove", updateScreenCoords);
-  //     gsap.ticker.add(animateFace);
-  //     blink.play();
-  //   }
-
-  // }
+  // Set a new timeout to reset the SVG elements after X seconds of inactivity
+  resetTimeoutRef.current = setTimeout(() => {
+    gsap.to("#face", { xPercent: 0, yPercent: 0 });
+    gsap.to("#face-inner", { xPercent: 0, yPercent: 0 });
+    gsap.to("#hair", { xPercent: 0, yPercent: 0, skewY: 0 });
+    gsap.to(".pupil", { xPercent: 0, yPercent: 0 });
+    gsap.to("#left-ear", { xPercent: 0, yPercent: 0 });
+    gsap.to("#right-ear", { xPercent: 0, yPercent: 0 });
+    gsap.to("#right-brow, #left-brow", { yPercent: 0 });
+  }, 5000);
+}
 
   function animateFace() {
     if (storedXRef.current === xPosRef.current && storedYRef.current === yPosRef.current) return;
@@ -142,47 +200,17 @@ function App() {
 
     const eyebrowY = Math.max(-10, Math.min(y * 2.5 , 2));
 
-    gsap.to("#face", { xPercent: x / 30, yPercent: y / 30 });
-    gsap.to("#face-inner", { xPercent: x / 10, yPercent: y / 10 });
-    gsap.to("#hair", { xPercent: x / 30, yPercent: y / 30 });
+    gsap.to("#face", { xPercent: x / 50, yPercent: y / 100});
+    gsap.to("#face-inner", { xPercent: x / 7, yPercent: y / 15 });
+    gsap.to("#hair", { xPercent: x / 50, yPercent: y / 60 , skewY: y / 100 });  
     gsap.to(".pupil", { xPercent: x / 2, yPercent: y / 3 });
-    gsap.to("#left-ear", { xPercent: x / 30, yPercent: y / 30 });
+    gsap.to("#left-ear", { xPercent: (x / 20) * -1, yPercent: -y / 10 });
+    gsap.to("#right-ear", { xPercent: (x / 20) * -1, yPercent: -y / 10 });
     gsap.to("#right-brow, #left-brow", { yPercent: eyebrowY });
 
     storedXRef.current = xPosRef.current;
     storedYRef.current = yPosRef.current;
   }
-
-
-//BLINK ANIMATION
-  const blink = gsap.timeline({
-    repeat: -1,
-    repeatDelay: 5,
-    paused: true
-  });
-useEffect(() => {
-  if (domContentLoaded) {
-  blink
-  .to("#right-eye, #left-eye", { duration: 0.01, opacity: 0 }, 0)
-  .to("#right-eye-2, #left-eye-2", { duration: 0.01, opacity: 1 }, 0)
-  .to("#right-eye, #left-eye", { duration: 0.01, opacity: 1 }, 0.15)
-  .to("#right-eye-2, #left-eye-2", { duration: 0.01, opacity: 0 }, 0.15);  
-  }
-}, [domContentLoaded, blink]);
-
-  useEffect(() => {
-    if (isExcited) {
-      gsap.to("#mouth", { opacity: 0, duration: 0.2 });
-      gsap.to("#eyes", { opacity: 0, duration: 0.2 });
-      gsap.to("#mouth-happy", { opacity: 1, duration: 0.2 });
-      gsap.to("#eyes-embarassed", { opacity: 1, duration: 0.2 });
-    } else {
-      gsap.to("#mouth", { opacity: 1, duration: 0.2 });
-      gsap.to("#eyes", { opacity: 1, duration: 0.2 });
-      gsap.to("#mouth-happy", { opacity: 0, duration: 0.2 });
-      gsap.to("#eyes-embarassed", { opacity: 0, duration: 0.2 });
-    }
-  }, [isExcited]);
 
   return (
     <>
@@ -417,7 +445,7 @@ useEffect(() => {
           <path className="cls-6" d="M91.88,67.77c0,2.19-3.52,3.97-6.49,3.97s-5.38-1.44-5.38-3.63,3.52-4.31,6.49-4.31,5.38,1.78,5.38,3.97Z"/>
           <path className="cls-1" d="M43.24,67.77c0,2.19,3.52,3.97,6.49,3.97s5.38-1.44,5.38-3.63-3.52-4.31-6.49-4.31-5.38,1.78-5.38,3.97Z"/>
         </g>
-        <g id="eyes-embarassed" className="cls-20">
+        <g id="eyes-embarrassed" className="cls-20">
           <g id="right-eye-2" data-name="right-eye">
             <path className="cls-9" d="M84.41,57.5c0,2.38-1.75,3.11-4.12,3.11s-4.48-.74-4.48-3.11c0-.97.33-1.45.9-2.15.66-.8,1.99-1.1,3.4-1.1s2.65.3,3.42,1.1c.65.68.88,1.13.88,2.15Z"/>
             <g id="pupil-3" className="pupil" data-name="pupil">
@@ -428,9 +456,9 @@ useEffect(() => {
             </g>
             <path className="cls-10" d="M86.84,59.35c-.03-.22.04-1.98-.59-3.85-.46-1.37-4.09-2.53-6.31-2.55-1.97-.02-3.99.5-4.72,2.55-.77,2.17-.44,4.53,1.92,5.5.77.32,1.63.34,2.42.35,1.56.03,2,0,3.58-.38.3-.07.82-.5,1.04-.76,1.5-1.75,1.08-2.71,1.02-3.26-.08-.74,1.5,2,1.64,2.39ZM80.37,60.46c-2.38,0-4.56-.51-4.56-2.89,0-.97.33-1.45.9-2.15.66-.8,1.99-1.1,3.4-1.1s2.65.3,3.42,1.1c.65.68.99,1.14.88,2.15-.26,2.39-1.67,2.89-4.04,2.89Z"/>
           </g>
-          <g id="left-eye-2" className="pupil" data-name="left-eye">
+          <g id="left-eye-2" data-name="left-eye">
             <path className="cls-9" d="M51.58,57.5c0,2.38,1.75,3.11,4.12,3.11s4.48-.74,4.48-3.11c0-.97-.33-1.45-.9-2.15-.66-.8-1.99-1.1-3.4-1.1s-2.65.3-3.42,1.1c-.65.68-.88,1.13-.88,2.15Z"/>
-            <g>
+            <g className="pupil" data-name="pupil">
               <circle className="cls-14" cx="55.73" cy="57.82" r="2.65"/>
               <circle cx="55.73" cy="57.82" r="1.26"/>
               <circle className="cls-8" cx="57" cy="56.26" r=".63"/>
