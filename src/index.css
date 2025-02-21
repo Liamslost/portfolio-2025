@@ -1,14 +1,11 @@
 @import "tailwindcss";
 
 @theme {
+  --color-primary: #2e2e2e;
+  --color-secondary: #3c5b60;
+  --color-tertiary: #454545;
 
-  --color-primary: #476A6F;
-  --color-secondary: #699CA4;
-  --color-tertiary: #3C5B60;
-
-  --color-text-primary: #FFF8E0;
-
-
+  --color-text-primary: #fff8e0;
 }
 
 .clipPath {

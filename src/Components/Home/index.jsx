@@ -1,5 +1,4 @@
 import "../../index.css";
-import { Copyright } from "lucide-react";
 import { gsap } from "gsap";
 import { useEffect, useState, useRef } from "react";
 
@@ -13,8 +12,9 @@ function Home() {
   const storedXRef = useRef(0);
   const storedYRef = useRef(0);
   const resetTimeoutRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
 
-  const meTl = gsap.timeline({ delay: 1 });
+  const meTl = useRef(gsap.timeline({ delay: 1 })).current;
   const blink = useRef(
     gsap.timeline({
       repeat: -1,
@@ -101,9 +101,7 @@ function Home() {
     };
 
     if (
-      document.readyState === "complete" ||
-      document.readyState === "interactive"
-    ) {
+      document.readyState === "complete" || document.readyState === "interactive") {
       handleDomContentLoaded();
     } else {
       window.addEventListener("DOMContentLoaded", handleDomContentLoaded);
@@ -112,7 +110,7 @@ function Home() {
     return () => {
       window.removeEventListener("DOMContentLoaded", handleDomContentLoaded);
     };
-  }, [meTl]);
+  }, []);
 
   useEffect(() => {
     if (domContentLoaded) {
@@ -139,10 +137,21 @@ function Home() {
     }
   }, [isExcited]);
 
+  // prevents animation being stuck on excited face
   useEffect(() => {
     const anchors = document.querySelectorAll("a");
-    const handleMouseEnter = () => setIsExcited(true);
-    const handleMouseLeave = () => setIsExcited(false);
+    const handleMouseEnter = () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      hoverTimeoutRef.current = setTimeout(() => setIsExcited(true), 100);
+    };
+    const handleMouseLeave = () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      hoverTimeoutRef.current = setTimeout(() => setIsExcited(false), 300);
+    };
 
     anchors.forEach((anchor) => {
       anchor.addEventListener("mouseenter", handleMouseEnter);
@@ -157,7 +166,7 @@ function Home() {
     };
   }, []);
 
-  // Mouse tracking event
+  // Mouse tracking
   useEffect(() => {
     window.addEventListener("mousemove", updateScreenCoords);
 
@@ -175,7 +184,7 @@ function Home() {
       clearTimeout(resetTimeoutRef.current);
     }
 
-    // Set a new timeout to reset the SVG elements after X seconds of inactivity
+    // Set a timeout to reset the SVG elements after X seconds of inactivity
     resetTimeoutRef.current = setTimeout(() => {
       gsap.to("#face", { xPercent: 0, yPercent: 0 });
       gsap.to("#face-inner", { xPercent: 0, yPercent: 0 });
@@ -184,7 +193,7 @@ function Home() {
       gsap.to("#left-ear", { xPercent: 0, yPercent: 0 });
       gsap.to("#right-ear", { xPercent: 0, yPercent: 0 });
       gsap.to("#right-brow, #left-brow", { yPercent: 0 });
-    }, 5000);
+    }, 3000);
   }
 
   function animateFace() {
@@ -223,7 +232,7 @@ function Home() {
         <div className="flex justify-center items-center h-full w-full z-0">
           <div
             id=""
-            className="sm:size-60 md:size-90 lg:size-80 xl:size-125 2xl:size-150  bg-black absolute rounded-full mx-auto z-0 border-tertiary drop-shadow-[18px_4px_10px_rgba(0,0,0,0.3)]"
+            className="sm:size-60 md:size-90 lg:size-80 xl:size-125 2xl:size-150  bg-black absolute rounded-full mx-auto z-0 border-tertiary drop-shadow-[18px_4px_10px_rgba(0,0,0,0.4)]"
           ></div>
           <div
             id="background"
@@ -722,10 +731,6 @@ function Home() {
           </div>
         </div>
       </section>
-      <footer className="text-white bg-tertiary h-12 pl-10 flex items-center">
-        <Copyright className="text-black mr-3" />
-        Copyright2025
-      </footer>
 </>
   );
 }
