@@ -225,7 +225,7 @@ function Home() {
     
   return (
 <>
-<section className="h-[calc(100vh-3rem)] w-full bg-primary p-10 overflow-hidden">
+<section className="h-[calc(100vh-3.5rem)] w-full bg-primary p-10 overflow-hidden">
         <h1 className="text-text-primary text-5xl p-4 absolute font-semibold">
           Hi. I&apos;m Liam
         </h1>
