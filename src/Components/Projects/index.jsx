@@ -52,18 +52,14 @@ function Projects() {
 
   return (
     <section className=" w-[1200px]  m-auto">
-      <div>
-        <h1 className="text-text-primary text-5xl p-4 font-semibold">
-          Hi. I&apos;m Liam
-        </h1>
-      </div>
+
       <div>
         <h1 className="w-5/12 text-3xl text-text-primary mt-20 mb-8 tracking-[0.1rem]">
           full-stack applications, data visualizations, and interactive tools -
           built with performance, <u>usability</u>, and creativity in mind.
         </h1>
         {/* top */}
-        <div className="h-90 bg-secondary mb-6 rounded-2xl grid grid-cols-2 gap-5 p-4">
+        <div className="h-90 bg-secondary mb-6 rounded-2xl grid grid-cols-2 gap-5 p-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
           <div className=" bg-tertiary rounded-2xl">left</div>
           <div className="grid grid-rows-2 gap-y-5">
             <div className="bg-primary rounded-2xl"></div>
@@ -82,7 +78,7 @@ function Projects() {
           <div className="bg-secondary rounded-2xl"></div>
         </div>
         {/* bottom */}
-        <div className="w-full  bg-tertiary p-4 grid grid-cols-4 my-6 rounded-2xl gap-5">
+        <div className="w-full  bg-tertiary p-4 grid grid-cols-4 my-6 rounded-2xl gap-5 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
         {ProjectsData.map((project, index) => (
           <div key={index} className="h-full w-full bg-primary rounded-2xl">
             <div className="w-full h-5/12 rounded-t-xl contain-content ">
