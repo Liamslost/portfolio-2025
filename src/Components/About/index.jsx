@@ -2,7 +2,7 @@ function About() {
   return (
     <div className="min-h-[calc(100vh-11rem)] w-10/12 m-auto grid md:grid-cols-11 grid-cols-1 gap-5 pt-10 md:pt-25 pb-20">
       <div className=" h-10/12 md:h-fit contain-content rounded-2xl lg:col-span-3 md:col-span-4 border-2 border-tertiary m-auto">
-        <img className="saturate-10 translate-y-[10%] md:translate-y-0 scale-150 md:scale-120" src="portfolio-2025/profie-pic-3.jpg" alt="tall dark handsome man" />
+        <img className="saturate-10 translate-y-[10%] md:translate-y-0 scale-150 md:scale-120" src="profie-pic-3.jpg" alt="tall dark handsome man" />
       </div>
       <div className="bg-secondary md:col-span-7 max-w-150 lg:col-span-8 py-4 px-10 space-y-4 text-sm text-text-primary rounded-2xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" >
         <h3 className="opacity-50">liamslost/README.md</h3>

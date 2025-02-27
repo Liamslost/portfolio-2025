@@ -94,58 +94,58 @@ function Projects() {
             - built with performance, usability, and creativity in mind.
           </p>
         </div>
-        <div className="bg-secondary overflow-hidden p-7 block md:col-start-5 md:col-end-14 md:row-start-1 md:row-end-5 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.1)] hover:-rotate-2 hover:-translate-y-8 transition-all duration-500">
+        <div className="bg-secondary overflow-hidden p-7 block md:col-start-5 md:col-end-14 md:row-start-1 md:row-end-5 rounded-2xl hover:drop-shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:-rotate-2 hover:-translate-y-8 transition-all duration-500">
         <h1 className="text-right text-md font-light tracking-widest">
           Mach Machines</h1>
         <h2 className="text-right text-3xl mb-3 tracking-wider">
           Design</h2>
           <img className="relative left-1/12 top-0 rounded-xl"
-          src="portfolio-2025/projects/work-offset.png" 
+          src="projects/work-offset.png" 
           alt="browser screenshot" />
         </div>
-        <div className="bg-primary overflow-hidden block px-7 py-3 md:col-start-14 md:col-end-17 md:row-start-1 md:row-end-5 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.2)] hover:rotate-2 hover:-translate-y-8 transition-all duration-500">
+        <div className="bg-primary overflow-hidden block px-7 py-3 md:col-start-14 md:col-end-17 md:row-start-1 md:row-end-5 rounded-2xl hover:drop-shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:rotate-2 hover:-translate-y-8 transition-all duration-500">
         <h1 className="text-right text-md font-light tracking-widest">
           Tool Visualiser</h1>
         <h2 className="text-right text-3xl mb-3 tracking-wider">
           Design</h2>
           <img className="relative left-2/12 top-2/12 rounded-md scale-150"
-          src="portfolio-2025/projects/work-offset.png" 
+          src="projects/work-offset.png" 
           alt="browser screenshot" />
         </div>
-        <div className="bg-secondary overflow-hidden p-7 block md:col-start-1 md:col-end-5 md:row-start-7 md:row-end-13 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.2)] hover:-rotate-2 hover:-translate-y-5 transition-all duration-500">
+        <div className="bg-secondary overflow-hidden p-7 block md:col-start-1 md:col-end-5 md:row-start-7 md:row-end-13 rounded-2xl hover:shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:-rotate-2 hover:-translate-y-5 transition-all duration-500">
           <h1 className="text-right text-md font-light tracking-widest">Whack-A-Jacko</h1>
           <h2 className="text-right text-3xl tracking-wider">Mobile</h2>
           <img
           className="relative top-1/12 left-1/2 -translate-x-1/2 min-h-full"
-            src="portfolio-2025/projects/whackA-mobile.png"
+            src="projects/whackA-mobile.png"
             alt="mobile phone screen shot"
           />
         </div>
-        <div className="bg-primary overflow-hidden p-7 block md:col-start-5 md:col-end-12 md:row-start-5 md:row-end-10 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.2)] hover:rotate-1 hover:-translate-y-5 transition-all duration-300 ">
+        <div className="bg-primary overflow-hidden p-7 block md:col-start-5 md:col-end-12 md:row-start-5 md:row-end-10 rounded-2xl hover:shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:rotate-1 hover:-translate-y-5 transition-all duration-300 ">
         <h1 className="text-right text-md font-light tracking-widest">
           Karen-ipsum</h1>
         <h2 className="text-right text-3xl mb-3 tracking-wider">
           Full Stack</h2>
           <img className="relative left-2/12 md:left-1/12 top-2/12 scale-150 md:scale-100 rounded-sm md:rounded-xl"
-          src="portfolio-2025/projects/karenIpsum.png" 
+          src="projects/karenIpsum.png" 
           alt="browser screenshot" />
         </div>
-        <div className="bg-primary overflow-hidden p-7 block md:col-start-12 md:col-end-17 md:row-start-5 md:row-end-10 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.2)] hover:-rotate-1 hover:-translate-y-5 transition-all duration-500">
+        <div className="bg-primary overflow-hidden p-7 block md:col-start-12 md:col-end-17 md:row-start-5 md:row-end-10 rounded-2xl hover:shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:-rotate-1 hover:-translate-y-5 transition-all duration-500">
         <h1 className="text-right text-md font-light tracking-widest">
           Keyboard Warrior</h1>
         <h2 className="text-right text-3xl mb-3 tracking-wider">
           Browser</h2>
           <img className="relative left-1/12 rounded-md"
-          src="portfolio-2025/projects/keyboard-warrior.png" 
+          src="projects/keyboard-warrior.png" 
           alt="browser screenshot" />
         </div>
-        <div className="bg-primary overflow-hidden px-7 py-3 block md:col-start-5 md:col-end-9 md:row-start-10 md:row-end-13 rounded-2xl hover:shadow-[0px_10px_4rem_rgba(255,255,255,0.2)] hover:-rotate-2 hover:translate-y-5 transition-all duration-500">
+        <div className="bg-primary overflow-hidden px-7 py-3 block md:col-start-5 md:col-end-9 md:row-start-10 md:row-end-13 rounded-2xl hover:shadow-[0px_10px_2rem_rgba(255,255,255,0.1)] hover:-rotate-2 hover:translate-y-5 transition-all duration-500">
         <h1 className="text-right text-md font-light tracking-widest">
           Splitter</h1>
         <h2 className="text-right text-3xl mb-3 tracking-wider">
           React</h2>
           <img className="relative left-2/12 rounded-md"
-          src="portfolio-2025/projects/split.png" 
+          src="projects/split.png" 
           alt="browser screenshot" />
         </div>
         <div className="bg-secondary block md:col-start-9 md:col-end-17 md:row-start-10 md:row-end-13 rounded-2xl "></div>

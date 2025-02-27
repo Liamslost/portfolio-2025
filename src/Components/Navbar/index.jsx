@@ -19,7 +19,7 @@ function Navbar() {
           } `}
         ></div>
         <img
-          src="portfolio-2025/mini-avatar.png"
+          src="mini-avatar.png"
           alt="avatar"
           className={`${isContact ? "opacity-0" : ""} size-20 ml-15 z-1`}
         />
