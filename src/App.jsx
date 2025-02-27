@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="bg-primary">
-      <BrowserRouter>
+      <BrowserRouter basename="/portfolio-2025">
      <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
