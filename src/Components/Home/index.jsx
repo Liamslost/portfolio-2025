@@ -129,12 +129,13 @@ function Home() {
       gsap.to("#eyes", { opacity: 0, duration: 0.5 });
       gsap.to("#mouth-happy", { opacity: 1, duration: 0.5 });
       gsap.to("#cheeks", { yPercent: -75, duration: 0.5 });
+      gsap.to("#face", {scaleY: 1.015});
     } else {
       gsap.to("#mouth", { opacity: 1, duration: 0.2 });
       gsap.to("#eyes", { opacity: 1, duration: 0.2 });
       gsap.to("#mouth-happy", { opacity: 0, yPercent: -15 ,duration: 0.2 });
       gsap.to("#cheeks", { yPercent: 0, duration: 0.2 });
-      gsap.to("#face", {scaleY: "130%"})
+      gsap.to("#face", {scaleY: 1});
     }
   }, [isExcited]);
 
@@ -151,7 +152,7 @@ function Home() {
       if (hoverTimeoutRef.current) {
         clearTimeout(hoverTimeoutRef.current);
       }
-      hoverTimeoutRef.current = setTimeout(() => setIsExcited(false), 300);
+      hoverTimeoutRef.current = setTimeout(() => setIsExcited(false), 200);
     };
 
     anchors.forEach((anchor) => {
@@ -228,7 +229,7 @@ function Home() {
   return (
 <>
 <section className="h-[calc(100vh-3.5rem)] w-full bg-primary p-10 overflow-hidden">
-        <h1 className="text-text-primary text-5xl ml-15 p-4 absolute font-semibold">
+        <h1 className="text-text-primary text-xl md:text-5xl md:ml-15 md:p-4 md:absolute font-semibold">
           Hi. I&apos;m Liam
         </h1>
         <div className="flex justify-center items-center h-full w-full z-0">

@@ -266,7 +266,7 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-11rem)] max-w-[300px] md:max-w-[760px] lg:max-w-[1000px] xl:max-w-[1200px] m-auto grid md:grid-cols-2 grid-cols-1 gap-10 pb-20 pt-20">
+    <div className="min-h-[calc(100vh-11rem)] w-10/12 m-auto grid md:grid-cols-2 grid-cols-1 gap-10 pb-20 pt-20">
         <div className="">
           <h1 className="md:w-9/12 text-xl md:text-3xl text-text-primary mt-10 md:mt-0 md:pt-20 tracking-[0.1rem] font-light">
             If you&apos;re passionate about building creative solutions, lets
