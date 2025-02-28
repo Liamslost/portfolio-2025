@@ -21,7 +21,7 @@ function Contact() {
   ).current;
 
   useEffect(() => {
-    gsap.set("#me", { yPercent: 80 });
+    gsap.set("#me", { yPercent: 100 });
     gsap.set("#face", { yPercent: 5 });
     gsap.set("#left-ear", { yPercent: 15, xPercent: 10, rotate: 4 });
     gsap.set("#right-ear", { yPercent: 15, xPercent: -10, rotate: -4 });
